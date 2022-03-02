@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Meu Dinheiro</string>
+    <string name="label_dashboard">Painel</string>
+    <string name="label_cards">Cartões</string>
+    <string name="label_bills">Despesas</string>
+    <string name="label_profile">Perfil</string>
+    <string name="label_settings">Configurações</string>
+    <string name="title_cards">Cartões</string>
+</resources>

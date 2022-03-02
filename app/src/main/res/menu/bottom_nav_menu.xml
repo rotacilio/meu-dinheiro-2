@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/dashboardFragment"
+        android:title="@string/label_dashboard"
+        android:icon="@drawable/ic_outline_dashboard_24" />
+    <item
+        android:id="@+id/cardsFragment"
+        android:title="@string/label_cards"
+        android:icon="@drawable/ic_outline_credit_card_24"/>
+    <item
+        android:id="@+id/billsFragment"
+        android:title="@string/label_bills"
+        android:icon="@drawable/ic_outline_bills_24"/>
+    <item
+        android:id="@+id/profileFragment"
+        android:title="@string/label_profile"
+        android:icon="@drawable/ic_baseline_person_outline_24"/>
+    <item
+        android:id="@+id/settingsFragment"
+        android:title="@string/label_settings"
+        android:icon="@drawable/ic_outline_settings_24"/>
+</menu>
