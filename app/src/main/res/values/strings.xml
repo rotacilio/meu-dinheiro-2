@@ -6,4 +6,7 @@
     <string name="label_profile">Perfil</string>
     <string name="label_settings">Configurações</string>
     <string name="title_cards">Cartões</string>
+
+    <string name="template_string_card_due_day">Vencimento: %d</string>
+    <string name="template_string_card_expiration_date">Validade: %s</string>
 </resources>

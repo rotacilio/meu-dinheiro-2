@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="card"
+            type="br.com.rotacilio.android.meudinheiro.model.Card" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -28,6 +30,8 @@
                 card_view:layout_constraintTop_toTopOf="parent"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_master_card"
+                cardImageFlag="@{card}"
                 tools:src="@drawable/ic_master_card"/>
 
             <LinearLayout
@@ -48,6 +52,7 @@
                     android:fontFamily="@font/roboto_medium"
                     android:textSize="18sp"
                     android:textColor="@color/black"
+                    android:text="@{card.nickname}"
                     tools:text="Samsung Itaucard"/>
 
                 <View
@@ -64,6 +69,7 @@
                     android:fontFamily="@font/roboto_light"
                     android:textSize="14sp"
                     android:textColor="@color/black"
+                    cardDueDay="@{card}"
                     tools:text="Vencimento: 6"/>
 
                 <TextView
@@ -73,6 +79,7 @@
                     android:fontFamily="@font/roboto_light"
                     android:textSize="14sp"
                     android:textColor="@color/black"
+                    cardExpirationDate="@{card}"
                     tools:text="Validade: 09/2027"/>
 
             </LinearLayout>
