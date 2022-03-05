@@ -5,6 +5,10 @@ plugins {
     id 'kotlin-kapt'
 }
 
+def ext = [
+    MOCK_API_URL : "\"http://"+getLocalIPv4()[0]+":3001/meudinheiro/api/v1/\""
+]
+
 android {
     compileSdk 32
 
@@ -20,9 +24,9 @@ android {
 
     buildTypes {
         debug {
+            applicationIdSuffix '.debug'
+            buildConfigField "String", "BASE_URL", ext.MOCK_API_URL
             debuggable true
-            applicationIdSuffix '.dev'
-            buildConfigField "String", "BASE_URL", DEBUG_API_BASE_URL
         }
         release {
             minifyEnabled false
@@ -75,4 +79,18 @@ dependencies {
 
     //Lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-alpha03"
+}
+
+//return all ipv4 addresses
+static def getLocalIPv4() {
+    def ip4s = []
+    NetworkInterface.getNetworkInterfaces()
+            .findAll { it.isUp() && !it.isLoopback() && !it.isVirtual() }
+            .each {
+                it.getInetAddresses()
+                        .findAll { !it.isLoopbackAddress() && it instanceof Inet4Address }
+                        .each { ip4s << it }
+            }
+
+    return ip4s
 }

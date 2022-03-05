@@ -12,17 +12,29 @@ class CardsFragmentViewModel(
     private val cardRepository: ICardRepository
 ) : ViewModel() {
 
-    private val _cardsList = MutableLiveData<List<Card>>(listOf())
-    val cardsList: LiveData<List<Card>>
-        get() = _cardsList
+    private val _viewState = MutableLiveData<ViewState>()
+    val viewState: LiveData<ViewState>
+        get() = _viewState
 
     private fun loadData() {
+        _viewState.postValue(ViewState.Loading)
         viewModelScope.launch {
-            _cardsList.postValue(cardRepository.findAll())
+            try {
+                val cards = cardRepository.findAll()
+                _viewState.postValue(ViewState.CardsLoaded(cards))
+            } catch (e: Exception) {
+                _viewState.postValue(ViewState.Error(e.localizedMessage))
+            }
         }
     }
 
     init {
         loadData()
+    }
+
+    sealed class ViewState {
+        object Loading: ViewState()
+        data class CardsLoaded(val cards: List<Card>): ViewState()
+        data class Error(val errorMessage: String?): ViewState()
     }
 }
