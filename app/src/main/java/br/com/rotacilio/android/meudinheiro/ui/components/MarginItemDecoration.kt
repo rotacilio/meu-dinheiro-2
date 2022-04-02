@@ -2,11 +2,11 @@ package br.com.rotacilio.android.meudinheiro.ui.components
 
 import android.graphics.Rect
 import android.view.View
-import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
-import br.com.rotacilio.android.meudinheiro.adapter.CardsListAdapter
 
-class MarginItemDecoration(private val spaceSize: Int) : RecyclerView.ItemDecoration() {
+class MarginItemDecoration(
+    private val spaceSize: Int
+) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -14,13 +14,13 @@ class MarginItemDecoration(private val spaceSize: Int) : RecyclerView.ItemDecora
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        super.getItemOffsets(outRect, view, parent, state)
-        val position = parent.getChildAdapterPosition(view)
-        with (outRect) {
-            val cardsListAdapter = parent.adapter as CardsListAdapter
-            if (position == cardsListAdapter.itemCount - 1) {
-                bottom = spaceSize
+        with(outRect) {
+            if (parent.getChildAdapterPosition(view) == 0) {
+                top = spaceSize
             }
+            left = spaceSize
+            right = spaceSize
+            bottom = spaceSize
         }
     }
 }

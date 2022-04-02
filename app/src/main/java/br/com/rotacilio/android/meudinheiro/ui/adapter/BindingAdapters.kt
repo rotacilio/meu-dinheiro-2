@@ -1,4 +1,4 @@
-package br.com.rotacilio.android.meudinheiro.adapter
+package br.com.rotacilio.android.meudinheiro.ui.adapter
 
 import android.widget.ImageView
 import android.widget.TextView
