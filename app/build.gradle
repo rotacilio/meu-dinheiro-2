@@ -6,7 +6,7 @@ plugins {
 }
 
 def ext = [
-    MOCK_API_URL : "\"http://"+getLocalIPv4()[0]+":3001/meudinheiro/api/v1/\""
+    MOCK_API_URL : "\"http://"+getLocalIPv4()[0]+":5001/meudinheiro/api/v1/\""
 ]
 
 android {
@@ -78,7 +78,10 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
 
     //Lifecycle
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-alpha03"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-alpha05"
+
+    //Lottie Animation
+    implementation 'com.airbnb.android:lottie:3.4.0'
 }
 
 //return all ipv4 addresses

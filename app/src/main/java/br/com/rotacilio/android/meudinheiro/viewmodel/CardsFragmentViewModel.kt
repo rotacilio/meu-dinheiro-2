@@ -7,9 +7,11 @@ import androidx.lifecycle.viewModelScope
 import br.com.rotacilio.android.meudinheiro.model.Card
 import br.com.rotacilio.android.meudinheiro.repository.ICardRepository
 import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class CardsFragmentViewModel(
-    private val cardRepository: ICardRepository
+    private val cardRepository: ICardRepository,
+    private val coroutineContext: CoroutineContext
 ) : ViewModel() {
 
     private val _viewState = MutableLiveData<ViewState>()
@@ -18,7 +20,7 @@ class CardsFragmentViewModel(
 
     private fun loadData() {
         _viewState.postValue(ViewState.Loading)
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineContext) {
             try {
                 val cards = cardRepository.findAll()
                 _viewState.postValue(ViewState.CardsLoaded(cards))

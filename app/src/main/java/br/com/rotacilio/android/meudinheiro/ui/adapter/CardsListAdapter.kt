@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.rotacilio.android.meudinheiro.databinding.CardListItemBinding
 import br.com.rotacilio.android.meudinheiro.model.Card
 
-class CardsListAdapter : ListAdapter<Card, CardsListAdapter.ViewHolder>(CardsListDiffCallback()) {
+class CardsListAdapter constructor(private val onClick: (card: Card) -> Unit = {}) :
+    ListAdapter<Card, CardsListAdapter.ViewHolder>(CardsListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.build(parent)
@@ -17,6 +18,9 @@ class CardsListAdapter : ListAdapter<Card, CardsListAdapter.ViewHolder>(CardsLis
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val card = getItem(position)
         holder.bind(card)
+        holder.itemView.setOnClickListener {
+            onClick(card)
+        }
     }
 
     class ViewHolder(

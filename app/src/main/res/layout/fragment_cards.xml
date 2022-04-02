@@ -34,11 +34,22 @@
             android:layout_marginTop="12dp"
             android:background="@color/black" />
 
+        <include layout="@layout/loading_view"
+            android:id="@+id/layoutLoadingView"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_gravity="center_horizontal"
+            android:visibility="visible"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCardsList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="12dp"
+            android:visibility="gone"
+            tools:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="10"
             tools:listitem="@layout/card_list_item"/>

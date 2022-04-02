@@ -9,4 +9,5 @@
 
     <string name="template_string_card_due_day">Vencimento: %d</string>
     <string name="template_string_card_expiration_date">Validade: %s</string>
+    <string name="loading">Carregando...</string>
 </resources>
