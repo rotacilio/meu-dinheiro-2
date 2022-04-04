@@ -5,28 +5,38 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.rotacilio.android.meudinheiro.model.Card
-import br.com.rotacilio.android.meudinheiro.repository.ICardRepository
+import br.com.rotacilio.android.meudinheiro.state.DataState
+import br.com.rotacilio.android.meudinheiro.usecases.cards.GetCardsListUseCase
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class CardsFragmentViewModel(
-    private val cardRepository: ICardRepository,
+    private val getCardsListUseCase: GetCardsListUseCase,
     private val coroutineContext: CoroutineContext
 ) : ViewModel() {
 
-    private val _viewState = MutableLiveData<ViewState>()
-    val viewState: LiveData<ViewState>
-        get() = _viewState
+    private val _viewState = MutableStateFlow<ViewState>(ViewState.Empty)
+    val viewState = _viewState.asStateFlow()
 
     private fun loadData() {
-        _viewState.postValue(ViewState.Loading)
         viewModelScope.launch(coroutineContext) {
-            try {
-                val cards = cardRepository.findAll()
-                _viewState.postValue(ViewState.CardsLoaded(cards))
-            } catch (e: Exception) {
-                _viewState.postValue(ViewState.Error(e.localizedMessage))
-            }
+            getCardsListUseCase().onEach { dataState ->
+                when (dataState) {
+                    is DataState.Loading -> _viewState.value = ViewState.Loading(true)
+                    is DataState.Error -> {
+                        _viewState.value = ViewState.Loading(false)
+                        _viewState.value = ViewState.Error(dataState.exception.localizedMessage)
+                    }
+                    is DataState.Success -> {
+                        _viewState.value = ViewState.Loading(false)
+                        _viewState.value = ViewState.CardsLoaded(dataState.data)
+                    }
+                }
+            }.catch { e ->
+                e.printStackTrace()
+                _viewState.value = ViewState.Error(e.localizedMessage)
+            }.launchIn(viewModelScope)
         }
     }
 
@@ -34,9 +44,10 @@ class CardsFragmentViewModel(
         loadData()
     }
 
-    sealed class ViewState {
-        object Loading: ViewState()
-        data class CardsLoaded(val cards: List<Card>): ViewState()
-        data class Error(val errorMessage: String?): ViewState()
+    sealed interface ViewState {
+        object Empty : ViewState
+        data class Loading(val show: Boolean): ViewState
+        data class CardsLoaded(val cards: List<Card>): ViewState
+        data class Error(val errorMessage: String?): ViewState
     }
 }
