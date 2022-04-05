@@ -12,6 +12,7 @@ import br.com.rotacilio.android.meudinheiro.extensions.dp
 import br.com.rotacilio.android.meudinheiro.ui.adapter.CardsListAdapter
 import br.com.rotacilio.android.meudinheiro.ui.components.MarginItemDecoration
 import br.com.rotacilio.android.meudinheiro.viewmodel.CardsFragmentViewModel
+import br.com.rotacilio.android.meudinheiro.viewmodel.GenericViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -49,18 +50,18 @@ class CardsFragment : Fragment() {
 
     private fun configureObservers() {
         lifecycleScope.launch {
-            viewModel.viewState.collect { state ->
+            viewModel.uiState.collect { state ->
                 when (state) {
-                    is CardsFragmentViewModel.ViewState.Loading -> {
+                    is GenericViewModel.UiState.Loading -> {
                         binding.layoutLoadingView.visibility =
                             if (state.show) View.VISIBLE else View.GONE
                         binding.rvCardsList.visibility =
                             if (!state.show) View.VISIBLE else View.GONE
                     }
-                    is CardsFragmentViewModel.ViewState.Error -> {
+                    is GenericViewModel.UiState.Error -> {
                         Log.e(tag, "configureObservers: error: ${state.errorMessage}")
                     }
-                    is CardsFragmentViewModel.ViewState.CardsLoaded -> {
+                    is CardsFragmentViewModel.UiStateVC.CardsLoaded -> {
                         cardAdapter.submitList(state.cards)
                     }
                     else -> Unit
