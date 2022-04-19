@@ -10,4 +10,10 @@
     <string name="template_string_card_due_day">Vencimento: %d</string>
     <string name="template_string_card_expiration_date">Validade: %s</string>
     <string name="loading">Carregando...</string>
+    <string name="label_due_day">Vencimento:</string>
+    <string name="label_expiration_date">Validade:</string>
+    <string name="label_total_expenses">Total de despesas:</string>
+    <string name="label_excluir">Remover</string>
+    <string name="label_editar">Editar</string>
+    <string name="label_expenses">Despesas</string>
 </resources>

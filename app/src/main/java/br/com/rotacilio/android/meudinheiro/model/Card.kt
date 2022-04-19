@@ -1,6 +1,8 @@
 package br.com.rotacilio.android.meudinheiro.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import java.io.Serializable
 import java.util.*
 
 data class Card(
@@ -11,7 +13,7 @@ data class Card(
     val flag: CardFlag,
     @Json(name = "created_at") val createdAt: String,
     @Json(name = "updated_at") val updatedAt: String?
-)
+) : Serializable
 
 data class CardFlag(
     val id: Long = 0L,

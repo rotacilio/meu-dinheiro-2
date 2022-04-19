@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -10,6 +12,213 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvCardNickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:text="@{card.nickname}"
+            android:textSize="28sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_medium"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Itaucard"/>
+
+        <View
+            android:id="@+id/vSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/tvCardNickname"/>
+
+        <LinearLayout
+            android:id="@+id/llCardDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="12dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/vSeparator">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivCardFlag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:layout_marginEnd="8dp"
+                android:adjustViewBounds="true"
+                cardImageFlag="@{card}"
+                tools:src="@drawable/ic_master_card"/>
+
+            <LinearLayout
+                android:id="@+id/llCardInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_due_day"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_medium"/>
+
+                    <TextView
+                        android:id="@+id/tvDueDay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="@{Integer.toString(card.dueDay)}"
+                        tools:text="6"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_expiration_date"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_medium"/>
+
+                    <TextView
+                        android:id="@+id/tvExpirationDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="@{card.expirationDate}"
+                        tools:text="09/2027"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_total_expenses"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_medium"/>
+
+                    <TextView
+                        android:id="@+id/tvTotalExpenses"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="R$ 1.454,77" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvLabelExpenses"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/label_expenses"
+            android:textAlignment="viewStart"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/roboto_medium"
+            app:layout_constraintTop_toBottomOf="@id/llCardDetail"
+            app:layout_constraintStart_toStartOf="@id/llCardDetail"
+            app:layout_constraintEnd_toEndOf="@id/llCardDetail"/>
+
+        <View
+            android:id="@+id/vSeparatorExpenses"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelExpenses"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/llButtons"
+            app:layout_constraintTop_toBottomOf="@id/vSeparatorExpenses"
+            app:layout_constraintVertical_bias="1.0"
+            tools:itemCount="10"
+            tools:layout_editor_absoluteX="-45dp"
+            tools:listitem="@layout/card_detail_expense_item">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <LinearLayout
+            android:id="@+id/llButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                android:id="@+id/btnExcluir"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight=".5"
+                android:text="@string/label_excluir"
+                android:textAllCaps="false"
+                android:textColor="@color/indigo_500"
+                android:fontFamily="@font/roboto"
+                android:background="@drawable/bg_secondary_button"/>
+
+            <Button
+                android:id="@+id/btnEditar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginVertical="16dp"
+                android:text="@string/label_editar"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:fontFamily="@font/roboto"
+                android:background="@drawable/bg_primary_button"/>
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

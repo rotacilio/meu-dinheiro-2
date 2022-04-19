@@ -19,7 +19,7 @@ class CardsFragmentViewModel(
         data class CardsLoaded(val cards: List<Card>) : UiStateVC
     }
 
-    private fun loadData() {
+    fun loadData() {
         viewModelScope.launch(coroutineContext) {
             getCardsListUseCase().onEach { dataState ->
                 when (dataState) {
@@ -38,9 +38,5 @@ class CardsFragmentViewModel(
                 setUiState(UiState.Error(e.localizedMessage))
             }.launchIn(viewModelScope)
         }
-    }
-
-    init {
-        loadData()
     }
 }

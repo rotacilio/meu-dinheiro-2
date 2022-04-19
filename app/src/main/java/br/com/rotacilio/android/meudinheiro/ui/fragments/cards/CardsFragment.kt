@@ -1,4 +1,4 @@
-package br.com.rotacilio.android.meudinheiro.ui.fragments
+package br.com.rotacilio.android.meudinheiro.ui.fragments.cards
 
 import android.os.Bundle
 import android.util.Log
@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import br.com.rotacilio.android.meudinheiro.databinding.FragmentCardsBinding
 import br.com.rotacilio.android.meudinheiro.extensions.dp
 import br.com.rotacilio.android.meudinheiro.ui.adapter.CardsListAdapter
 import br.com.rotacilio.android.meudinheiro.ui.components.MarginItemDecoration
 import br.com.rotacilio.android.meudinheiro.viewmodel.CardsFragmentViewModel
 import br.com.rotacilio.android.meudinheiro.viewmodel.GenericViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,7 +22,8 @@ class CardsFragment : Fragment() {
     private lateinit var binding: FragmentCardsBinding
     private val viewModel: CardsFragmentViewModel by viewModel()
     private val cardAdapter: CardsListAdapter = CardsListAdapter {
-        Log.d(tag, "onCardClick: ${it.nickname}")
+        findNavController().navigate(
+            CardsFragmentDirections.actionCardsFragmentToCardDetailFragment(it))
     }
 
     override fun onCreateView(
@@ -39,6 +40,11 @@ class CardsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupUi()
         configureObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadData()
     }
 
     private fun setupUi() {

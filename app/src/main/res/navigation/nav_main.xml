@@ -17,9 +17,13 @@
         tools:layout="@layout/fragment_bills"/>
     <fragment
         android:id="@+id/cardsFragment"
-        android:name="br.com.rotacilio.android.meudinheiro.ui.fragments.CardsFragment"
+        android:name="br.com.rotacilio.android.meudinheiro.ui.fragments.cards.CardsFragment"
         android:label="fragment_cards"
-        tools:layout="@layout/fragment_cards" />
+        tools:layout="@layout/fragment_cards" >
+        <action
+            android:id="@+id/action_cardsFragment_to_cardDetailFragment"
+            app:destination="@id/cardDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="br.com.rotacilio.android.meudinheiro.ui.fragments.ProfileFragment"
@@ -30,4 +34,12 @@
         android:name="br.com.rotacilio.android.meudinheiro.ui.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/cardDetailFragment"
+        android:name="br.com.rotacilio.android.meudinheiro.ui.fragments.cards.CardDetailFragment"
+        android:label="CardDetailFragment"
+        tools:layout="@layout/fragment_card_detail">
+        <argument android:name="selectedCard"
+            app:argType="br.com.rotacilio.android.meudinheiro.model.Card" />
+    </fragment>
 </navigation>

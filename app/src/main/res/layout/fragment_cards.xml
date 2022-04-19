@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="#F6F6F6"
-        tools:context=".ui.fragments.CardsFragment">
+        tools:context=".ui.fragments.cards.CardsFragment">
 
         <TextView
             android:id="@+id/textView"
