@@ -12,9 +12,13 @@
         tools:layout="@layout/fragment_dashboard"/>
     <fragment
         android:id="@+id/billsFragment"
-        android:name="br.com.rotacilio.android.meudinheiro.ui.fragments.BillsFragment"
+        android:name="br.com.rotacilio.android.meudinheiro.ui.fragments.bills.BillsFragment"
         android:label="BillsFragment"
-        tools:layout="@layout/fragment_bills"/>
+        tools:layout="@layout/fragment_bills">
+        <action
+            android:id="@+id/action_billsFragment_to_createBillFragment"
+            app:destination="@id/createBillFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cardsFragment"
         android:name="br.com.rotacilio.android.meudinheiro.ui.fragments.cards.CardsFragment"
@@ -42,4 +46,9 @@
         <argument android:name="selectedCard"
             app:argType="br.com.rotacilio.android.meudinheiro.model.Card" />
     </fragment>
+    <fragment
+        android:id="@+id/createBillFragment"
+        android:name="br.com.rotacilio.android.meudinheiro.ui.fragments.bills.CreateBillFragment"
+        android:label="CreateBillFragment"
+        tools:layout="@layout/fragment_create_bill"/>
 </navigation>

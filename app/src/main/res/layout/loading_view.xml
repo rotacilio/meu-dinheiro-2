@@ -13,7 +13,7 @@
         android:adjustViewBounds="true"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_fileName="pacman_loading.json" />
+        app:lottie_fileName="circle_loading.json" />
 
     <TextView
         android:layout_width="wrap_content"
